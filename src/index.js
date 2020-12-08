@@ -1,1 +1,1 @@
-import './sass/modal.scss'
+import './sass/auth-modal.scss'

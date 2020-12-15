@@ -14,23 +14,20 @@ function renderAuthModal(form) {
     function makeMarkup(html) {
         refs.authFormContainer.insertAdjacentHTML('afterbegin', html);
         refs.authFormContainer.addEventListener('click', sendFormData);
-
-        const formInputEmail = document.querySelector('.js-reg-email');
-        const formInputPassword = document.querySelector('.js-reg-password');
-        const email = formInputEmail.value;
-        const password = formInputPassword.value;
         
-        let form = document.querySelector('.js-auth-form');
-        const formData = new FormData(form);
-
-        const fetchRegistration = new FetchRegistration({ email, password });
+        // let form = document.querySelector('.js-auth-form');
+        // const formData = new FormData(form);
 
         function sendFormData(event) {
             if(event.target.classList.contains("js-register")) {
                 event.preventDefault();
-                console.log(formInputEmail.value);
-                console.log(formInputPassword.value);
+                let email = document.querySelector('.js-reg-email').value;
+                let password = document.querySelector('.js-reg-password').value;
+
+                const fetchRegistration = new FetchRegistration({ email, password });
                 fetchRegistration.addNewUser();
+                console.log(email);
+                console.log(password);
             }
         }
 }

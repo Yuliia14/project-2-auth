@@ -16,8 +16,22 @@ export default class FetchLogIn {
         }
             getCurrentUserData() {
                 return fetch(`https://callboard-backend.herokuapp.com/auth/login`, this.options)
-                    .then(response => response.text())
-                    .then(result => console.log(result))
-                    .catch(error => console.log('error', error));
+                .then(response => {
+                    console.log(response);
+                    if(response.ok) {
+                        refs.authFormContainer.innerHTML =' '
+                    } else if (response.status === 409) {
+                        alert('Ошибка HTTP ' + response.status + ': Користувач з таким email вже зареєстрований.');
+                    } else if (response.status === 400) {
+                        alert('Ошибка HTTP ' + response.status + ': Заповніть, будь ласка, всі поля.');
+                    } else {
+                        alert('Ошибка HTTP ' + response.status + ': Вибачте, щось пішло не так, повторіть реєстрацію, будь ласка.');
+                    }    
+                    }
+                )
+                .catch(error => {
+                    console.log(error);
+                    alert('Вибачте, щось пішло не так, повторіть реєстрацію, будь ласка');
+                });
             }
         }

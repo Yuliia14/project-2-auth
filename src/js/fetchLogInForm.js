@@ -3,7 +3,7 @@ const refs = getRefs();
 import closeAuthModal from './renderAuthModal';
 import failureCallBack from './failureCallBack'
 
-export default class FetchRegistration {
+export default class FetchLogIn {
         constructor ({ email, password }) {
             this.email = email,
             this.password = password,
@@ -14,12 +14,10 @@ export default class FetchRegistration {
                 body: JSON.stringify({"email": `${email}`, "password": `${password}`})
             };
         }
-            addNewUser() {
-                return fetch(`https://callboard-backend.herokuapp.com/auth/register`, this.options)
+            getCurrentUserData() {
+                return fetch(`https://callboard-backend.herokuapp.com/auth/login`, this.options)
                     .then(response => response.text())
                     .then(result => console.log(result))
-                    // .then(closeAuthModal(event))
-                    // .catch(failureCallBack());
                     .catch(error => console.log('error', error));
             }
         }

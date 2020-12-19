@@ -1,5 +1,6 @@
 import AuthModalTmpl from '../templates/authorization.hbs';
 import FetchRegistration from './fetchRegForm';
+import FetchLogIn from './fetchLogInForm';
 
 import getRefs from './refsAuth';
 const refs = getRefs();
@@ -14,9 +15,10 @@ function renderAuthModal(form) {
     function makeMarkup(html) {
         refs.authFormContainer.insertAdjacentHTML('afterbegin', html);
         refs.authFormContainer.addEventListener('click', sendFormData);
-        
-        // let form = document.querySelector('.js-auth-form');
-        // const formData = new FormData(form);
+
+        const formEl = document.querySelector( '.js-auth-form' );
+        formEl.addEventListener('submit', closeAuthModal);
+        console.log(formEl);
 
         function sendFormData(event) {
             if(event.target.classList.contains("js-register")) {
@@ -25,9 +27,14 @@ function renderAuthModal(form) {
                 let password = document.querySelector('.js-reg-password').value;
 
                 const fetchRegistration = new FetchRegistration({ email, password });
-                fetchRegistration.addNewUser();
-                console.log(email);
-                console.log(password);
+                    fetchRegistration.addNewUser();
+            } else if(event.target.classList.contains("js-login")) {
+                event.preventDefault();
+                let email = document.querySelector('.js-reg-email').value;
+                let password = document.querySelector('.js-reg-password').value;
+
+                const fetchLogIn = new FetchLogIn({ email, password });
+                fetchLogIn.getCurrentUserData();
             }
         }
 }

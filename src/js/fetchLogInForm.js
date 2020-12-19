@@ -1,7 +1,6 @@
 import getRefs from './refsAuth';
 const refs = getRefs();
 import closeAuthModal from './renderAuthModal';
-import failureCallBack from './failureCallBack'
 
 export default class FetchLogIn {
         constructor ({ email, password }) {
@@ -19,9 +18,9 @@ export default class FetchLogIn {
                 .then(response => {
                     console.log(response);
                     if(response.ok) {
-                        refs.authFormContainer.innerHTML =' '
-                    } else if (response.status === 409) {
-                        alert('Ошибка HTTP ' + response.status + ': Користувач з таким email вже зареєстрований.');
+                        refs.authFormContainer.innerHTML =' ';
+                    } else if (response.status === 403) {
+                        alert('Ошибка HTTP ' + response.status + ': Неправильний email або пароль');
                     } else if (response.status === 400) {
                         alert('Ошибка HTTP ' + response.status + ': Заповніть, будь ласка, всі поля.');
                     } else {

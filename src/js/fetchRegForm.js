@@ -1,7 +1,6 @@
 import getRefs from './refsAuth';
 const refs = getRefs();
 import closeAuthModal from './renderAuthModal';
-import failureCallBack from './failureCallBack'
 
 export default class FetchRegistration {
         constructor ({ email, password }) {
@@ -19,7 +18,8 @@ export default class FetchRegistration {
                     .then(response => {
                         console.log(response);
                         if(response.ok) {
-                            refs.authFormContainer.innerHTML =' '
+                            alert('Дякуємо. Реєстрація пройшла успішно!');
+                            refs.authFormContainer.innerHTML =' ';
                         } else if (response.status === 409) {
                             alert('Ошибка HTTP ' + response.status + ': Користувач з таким email вже зареєстрований.');
                         } else if (response.status === 400) {

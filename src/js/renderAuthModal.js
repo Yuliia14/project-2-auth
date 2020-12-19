@@ -16,10 +16,6 @@ function renderAuthModal(form) {
         refs.authFormContainer.insertAdjacentHTML('afterbegin', html);
         refs.authFormContainer.addEventListener('click', sendFormData);
 
-        const formEl = document.querySelector( '.js-auth-form' );
-        formEl.addEventListener('submit', closeAuthModal);
-        console.log(formEl);
-
         function sendFormData(event) {
             if(event.target.classList.contains("js-register")) {
                 event.preventDefault();
